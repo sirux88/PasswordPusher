@@ -4,26 +4,13 @@ set -e
 export RAILS_ENV=production
 
 
-if [ -n "$PWP_DB" ]
+if [ -z "$DATABASE_URL" ]
 then
-    echo "Setting $PWP_DB database backend"
-    if [ "$PWP_DB" == "sqlite" ]
-    then
-        export DATABASE_URL=sqlite3:db/db.sqlite3
-    elif [[ "$PWP_DB" == "mysql" || "$PWP_DB" == "mariadb" ]]
-    then
-        export DATABASE_URL=mysql2://passwordpusher_user:passwordpusher_passwd@mysql:3306/passwordpusher_db
-    elif [ "$PWP_DB" == "postgres" ]
-    then
-        export DATABASE_URL=postgres://passwordpusher_user:passwordpusher_passwd@postgres:5432/passwordpusher_db
-    else 
-        echo "Unknown database backend $PWP_DB. Exiting..."
-        exit
-    fi
-    
+    echo "DATABASE_URL not specified. Assuming ephemeral backend. Database may be lost on container restart."
+    echo "To set a database backend refer to https://github.com/pglombardo/PasswordPusher/wiki/Switch-to-Another-Backend-Database#environment-variable"
+    export DATABASE_URL=sqlite3:db/db.sqlite3
 else 
-    echo "No database backend set. Exiting..."
-    exit
+    echo "According to DATABASE_URL database backend is set to $(echo $DATABASE_URL|cut -d ":" -f 1):..."
 fi
 
 echo "Password Pusher: migrating database to latest..."

@@ -2,4 +2,4 @@
 FROM pwpush
 
 # Setting database backend
-ENV PWP_DB=postgres
+ENV DATABASE_URL=postgres://passwordpusher_user:passwordpusher_passwd@postgres:5432/passwordpusher_db

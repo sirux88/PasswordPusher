@@ -3,4 +3,4 @@
 FROM pwpush
 
 # Setting database backend
-ENV PWP_DB=sqlite
+ENV DATABASE_URL=sqlite3:db/db.sqlite3
