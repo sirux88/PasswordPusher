@@ -4,7 +4,7 @@ services:
   passwordpusher:
     image: docker.io/pglombardo/pwpush:release
     environment:
-      DATABASE_URL: "DATABASE_URL=sqlite3:db/db.sqlite3" 
+      DATABASE_URL: "sqlite3:db/db.sqlite3" 
     ports:
       - "5100:5100"
     # You can set environment variables here, or in a .env file.  See:
