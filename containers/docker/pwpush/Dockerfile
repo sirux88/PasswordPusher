@@ -11,7 +11,7 @@ ARG BUNDLE_WITH
 ARG BUNDLE_WITHOUT
 ARG BUNDLE_DEPLOYMENT
 
-LABEL maintainer='pglombardo@hey.com'
+LABEL org.opencontainers.image.authors ='pglombardo@hey.com'
 
 # Required packages
 RUN apk add --no-cache build-base git curl tzdata zlib-dev nodejs yarn libc6-compat sqlite-dev mariadb-dev libpq-dev
