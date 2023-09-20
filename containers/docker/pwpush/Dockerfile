@@ -30,7 +30,10 @@ RUN bundle config set without "${BUNDLE_WITHOUT}" \
 
 RUN yarn install
 
-RUN bundle exec rails assets:precompile
+# Set DATABASE_URL to sqlite to have a ready
+# to use db file for ephemeral configuration
+ENV DATABASE_URL=sqlite3:db/db.sqlite3
+RUN bundle exec rails assets:precompile && bundle exec rake db:setup
 
 # Removing unneccesary files/directories
 RUN rm -rf node_modules tmp/cache vendor/assets spec \
@@ -62,7 +65,7 @@ RUN addgroup -g "${GID}" pwpusher \
 ENV LC_CTYPE=UTF-8 LC_ALL=en_US.UTF-8
 ENV APP_ROOT=/opt/PasswordPusher
 WORKDIR ${APP_ROOT}
-ENV RACK_ENV=private RAILS_ENV=private
+ENV RACK_ENV=production RAILS_ENV=production
 
 COPY --from=build-env --chown=pwpusher:pwpusher ${APP_ROOT} ${APP_ROOT}
 
