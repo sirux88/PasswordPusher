@@ -2,3 +2,5 @@
 # and speedup delevoping Dockerfiles 
 **/Dockerfile
 .git
+.gitignore
+/tmp
