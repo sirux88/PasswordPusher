@@ -15,7 +15,7 @@ services:
   passwordpusher:
     image: docker.io/pglombardo/pwpush-postgres:release
     environment:
-      PWP_DB: 'postgres'
+      DATABASE_URL: 'DATABASE_URL=postgres://passwordpusher_user:passwordpusher_passwd@postgres:5432/passwordpusher_db'
     ports:
       - "5100:5100"
     depends_on:
