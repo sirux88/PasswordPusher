@@ -6,5 +6,18 @@
 # Otherwise occationally a wrong version may be pulled from the repository
 FROM pwpush
 
+# Insert decrecation note to inform users while spinning up containers
+RUN sed -i '5 a \
+            echo "          ##########################################################################          "\n \
+            echo "          ###                   !!DEPRECATION NOTIFICATION!!                     ###          "\n \
+            echo "          ###  THIS IMAGE IS DEPRECATED. SUPPORT FOR THIS IMAGE WILL BE DROPPED  ###          "\n \
+            echo "          ###         IN THE NEAR FUTURE. PLEASE MIGRATE TO THE NEW IMAGE        ###          "\n \
+            echo "          ###                                                                    ###          "\n \
+            echo "          ###                      FOR MORE INFORMATION GOTO                     ###          "\n \
+            echo "          ###            https://github.com/pglombardo/PasswordPusher            ###          "\n \
+            echo "          ###                   !!DEPRECATION NOTIFICATION!!                     ###          "\n \
+            echo "          ##########################################################################          "\n \
+            ' ./containers/docker/pwpush/entrypoint.sh
+
 # Setting database backend
 ENV DATABASE_URL=postgres://passwordpusher_user:passwordpusher_passwd@postgres:5432/passwordpusher_db
