@@ -3,18 +3,19 @@ set -e
 
 export RAILS_ENV=production
 
-
 if [ -z "$DATABASE_URL" ]
 then
     echo "DATABASE_URL not specified. Assuming ephemeral backend. Database may be lost on container restart."
     echo "To set a database backend refer to https://github.com/pglombardo/PasswordPusher/wiki/Switch-to-Another-Backend-Database#environment-variable"
     export DATABASE_URL=sqlite3:db/db.sqlite3
+    LOG_DB_MIGRATION=false
 else 
     echo "According to DATABASE_URL database backend is set to $(echo $DATABASE_URL|cut -d ":" -f 1):..."
+    LOG_DB_MIGRATION=true
 fi
 
 echo "Password Pusher: migrating database to latest..."
-bundle exec rake db:migrate
+bundle exec rake db:migrate VERBOSE=$LOG_DB_MIGRATION
 
 if [ "$PWP_PRECOMPILE" == "true" ]
 then
