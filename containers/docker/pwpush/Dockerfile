@@ -1,7 +1,7 @@
 # Setting global arguments
 ARG BUNDLE_WITH=sqlite:mysql:postgres
 ARG BUNDLE_WITHOUT=development:test:private
-ARG BUNDLE_DEPLOYMENT=true 
+ARG BUNDLE_DEPLOYMENT=true
 
 # pwpush-ephemeral
 FROM ruby:3.2-alpine AS build-env
@@ -16,7 +16,7 @@ LABEL org.opencontainers.image.authors ='pglombardo@hey.com'
 # Required packages
 RUN apk add --no-cache build-base git curl tzdata zlib-dev nodejs yarn libc6-compat sqlite-dev mariadb-dev libpq-dev
 
-ENV APP_ROOT=/opt/PasswordPusher PATH=${APP_ROOT}:${PATH} HOME=${APP_ROOT}
+ENV APP_ROOT=/opt/PasswordPusher
 
 WORKDIR ${APP_ROOT}
 COPY ./ ${APP_ROOT}/
@@ -60,7 +60,7 @@ RUN addgroup -g "${GID}" pwpusher \
   && adduser -D -u "${UID}" -G pwpusher pwpusher
 
 ENV LC_CTYPE=UTF-8 LC_ALL=en_US.UTF-8
-ENV APP_ROOT=/opt/PasswordPusher PATH=${APP_ROOT}:${PATH} HOME=${APP_ROOT}
+ENV APP_ROOT=/opt/PasswordPusher
 WORKDIR ${APP_ROOT}
 ENV RACK_ENV=private RAILS_ENV=private
 
