@@ -119,3 +119,4 @@ group :production, :private do
   gem 'rack-throttle', '0.7.1'
 end
 
+gem 'git-version-bump'
