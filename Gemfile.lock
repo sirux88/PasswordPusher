@@ -574,7 +574,7 @@ DEPENDENCIES
   devise (>= 4.9.0)
   devise-i18n
   foreman
-  google-cloud-storage (~> 1.11)
+  google-cloud-storage (~> 1.44)
   high_voltage
   i18n-tasks (~> 1.0.12)
   jbuilder
