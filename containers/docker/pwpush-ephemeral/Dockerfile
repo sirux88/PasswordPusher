@@ -5,7 +5,7 @@ LABEL maintainer='pglombardo@hey.com'
 
 # Required packages
 RUN apk upgrade --no-cache \ 
-    && apk add --no-cache build-base git curl tzdata zlib-dev nodejs yarn libc6-compat sqlite-dev 
+    && apk add --no-cache build-base git curl tzdata zlib-dev nodejs yarn libc6-compat gcompat sqlite-dev 
 
 ENV APP_ROOT=/opt/PasswordPusher PATH=${APP_ROOT}:${PATH} HOME=${APP_ROOT}
 
